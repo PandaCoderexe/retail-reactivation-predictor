@@ -35,12 +35,12 @@ data/processed/*
 !data/sample/
 !data/sample/**
 
-models/*.joblib
-models/*.pkl
-models/*.pickle
-models/*.onnx
-models/*.bin
-!models/.gitkeep
+model_api/models/*.joblib
+model_api/models/*.pkl
+model_api/models/*.pickle
+model_api/models/*.onnx
+model_api/models/*.bin
+model_api/!models/.gitkeep
 
 *.log
 logs/
