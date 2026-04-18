@@ -68,7 +68,7 @@ class HealthResponse(ApiBaseModel):
 
 class RootResponse(ApiBaseModel):
     message: str
-    docs: str
+    #docs: str
     health: str
     models: str
     predict_default: str

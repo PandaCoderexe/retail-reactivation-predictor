@@ -1,0 +1,72 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model User {
+  id                 String               @id @default(uuid())
+  fullName           String
+  username           String               @unique
+  passwordHash       String
+  createdAt          DateTime             @default(now())
+  updatedAt          DateTime             @updatedAt
+
+  predictionRequests PredictionRequest[]
+
+  @@map("users")
+}
+
+model PredictionRequest {
+  id          String             @id @default(uuid())
+  userId      String
+  modelChosen String
+  isBatch     Boolean            @default(false)
+  threshold   Float?
+  createdAt   DateTime           @default(now())
+
+  user        User               @relation(fields: [userId], references: [id], onDelete: Cascade)
+  inputs      PredictionInput[]
+  results     PredictionResult[]
+
+  @@index([userId])
+  @@map("prediction_requests")
+}
+
+model PredictionInput {
+  id                  String             @id @default(uuid())
+  predictionRequestId String
+  invoice             String?
+  stockCode           String?
+  description         String?
+  quantity            Int?
+  invoiceDate         DateTime?
+  price               Float?
+  customerId          String?
+  country             String?
+  createdAt           DateTime           @default(now())
+
+  predictionRequest   PredictionRequest  @relation(fields: [predictionRequestId], references: [id], onDelete: Cascade)
+  result              PredictionResult?
+
+  @@index([predictionRequestId])
+  @@index([customerId])
+  @@map("prediction_inputs")
+}
+
+model PredictionResult {
+  id                  String             @id @default(uuid())
+  predictionRequestId String
+  predictionInputId   String             @unique
+  prediction          Int
+  probability         Float
+  createdAt           DateTime           @default(now())
+
+  predictionRequest   PredictionRequest  @relation(fields: [predictionRequestId], references: [id], onDelete: Cascade)
+  predictionInput     PredictionInput    @relation(fields: [predictionInputId], references: [id], onDelete: Cascade)
+
+  @@index([predictionRequestId])
+  @@map("prediction_results")
+}

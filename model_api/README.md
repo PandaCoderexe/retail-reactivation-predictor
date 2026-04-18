@@ -1,30 +1,30 @@
 # Model API
 
-FastAPI do obsługi predykcji dla modeli:
+FastAPI service for running predictions with the following models:
 
 - `logreg`
 - `ranfor`
 
-## Uruchomienie
+## Run
 
-Z katalogu głównego repo:
+From the repository root:
 
 ```bash
 uvicorn model_api.app.main:app --reload
 ```
 
-## Endpointy
+## Endpoints
 
 - `GET /`
 - `GET /health`
 - `GET /models`
-- `POST /predict` - domyślnie `logreg`
-- `POST /predict/batch` - domyślnie `logreg`
+- `POST /predict` - defaults to `logreg`
+- `POST /predict/batch` - defaults to `logreg`
 - `POST /predict/{model_key}`
 - `POST /predict/{model_key}/batch`
 
-Obsługiwane `model_key`:
+Supported `model_key` values:
 
 - `logreg`
 - `ranfor`
-- `random_forest` - alias do `ranfor`
+- `random_forest` - alias for `ranfor`

@@ -24,7 +24,7 @@ htmlcov/
 
 .env
 .env.*
-!.env.example
+!.env.sample
 
 data/raw/*
 data/interim/*
@@ -40,23 +40,25 @@ model_api/models/*.pkl
 model_api/models/*.pickle
 model_api/models/*.onnx
 model_api/models/*.bin
-model_api/!models/.gitkeep
+!model_api/models/.gitkeep
+
+skills-lock.json
 
 *.log
 logs/
 tmp/
 temp/
 
-backend/node_modules/
-backend/npm-debug.log*
-backend/yarn-debug.log*
-backend/yarn-error.log*
-backend/pnpm-debug.log*
+src/backend/node_modules/
+src/backend/npm-debug.log*
+src/backend/yarn-debug.log*
+src/backend/yarn-error.log*
+src/backend/pnpm-debug.log*
 
-frontend/node_modules/
-frontend/dist/
-frontend/build/
-frontend/.cache/
+src/frontend/node_modules/
+src/frontend/dist/
+src/frontend/build/
+src/frontend/.cache/
 
 *.pid
 *.seed

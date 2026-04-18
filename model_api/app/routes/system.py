@@ -15,7 +15,7 @@ def _get_model_service(request: Request) -> ModelService:
 def root() -> RootResponse:
     return RootResponse(
         message="Purchase Prediction ML Service is running.",
-        docs="/docs",
+        #docs="/docs",
         health="/health",
         models="/models",
         predict_default="/predict",
