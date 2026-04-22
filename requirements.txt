@@ -4,7 +4,7 @@ uvicorn==0.34.2
 joblib==1.5.3
 jupyterlab==4.5.6
 matplotlib==3.10.8
-numpy==2.4.4
+numpy==1.26.4
 pandas==3.0.2
 pydantic==2.11.7
 scikit-learn==1.8.0

@@ -38,6 +38,7 @@ model PredictionRequest {
 model PredictionInput {
   id                  String             @id @default(uuid())
   predictionRequestId String
+  features            Json?
   invoice             String?
   stockCode           String?
   description         String?
