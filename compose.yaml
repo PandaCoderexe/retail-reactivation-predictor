@@ -1,0 +1,32 @@
+services:
+  backend:
+    build:
+      context: ./src/backend
+      dockerfile: Dockerfile.app_api
+    env_file:
+      - ./src/backend/.env
+    environment:
+      MODEL_API_URL: http://model_api:8000
+      FRONTEND_ORIGIN: http://localhost:5173
+      PORT: 4000
+      NODE_ENV: development
+    ports:
+      - "4000:4000"
+    depends_on:
+      - model_api
+  frontend:
+    build:
+      context: ./src/frontend
+      dockerfile: Dockerfile.frontend
+    environment:
+      VITE_API_BASE_URL: http://localhost:4000
+    ports:
+      - "5173:5173"
+    depends_on:
+      - backend
+  model_api:
+    build:
+      context: .
+      dockerfile: model_api/Dockerfile.model_api
+    ports:
+      - "8000:8000"

@@ -1,0 +1,12 @@
+.git
+.gitignore
+node_modules
+dist
+build
+.cache
+.DS_Store
+*.log
+*.tsbuildinfo
+vite.config.js
+vite.config.d.ts
+

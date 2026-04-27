@@ -35,7 +35,6 @@ data/processed/*
 !data/sample/
 !data/sample/**
 
-model_api/models/*.joblib
 model_api/models/*.pkl
 model_api/models/*.pickle
 model_api/models/*.onnx

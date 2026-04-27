@@ -179,6 +179,14 @@ VITE_API_BASE_URL=http://localhost:4000
 
 If this is not set, the frontend defaults to `http://localhost:4000`.
 
+For Docker Compose development in this repository:
+
+- backend reads variables from `src/backend/.env` through `env_file`
+- frontend receives `VITE_API_BASE_URL=http://localhost:4000`
+- backend receives `MODEL_API_URL=http://model_api:8000`
+
+`JWT_SECRET` should also be present in `src/backend/.env` for login and authenticated requests to work correctly.
+
 ## Setup
 
 Install Python dependencies from the repository root:
@@ -241,6 +249,50 @@ Default local URLs:
 - Frontend: `http://localhost:5173`
 - Backend: `http://localhost:4000`
 - Model API: `http://127.0.0.1:8000`
+
+## Docker Development
+
+The repository includes a Docker Compose setup for local development.
+
+Files used by Docker:
+
+- `compose.yaml`
+- `src/frontend/Dockerfile.frontend`
+- `src/backend/Dockerfile.app_api`
+- `model_api/Dockerfile.model_api`
+
+This Docker setup is intentionally development-oriented, not production-oriented:
+
+- frontend runs the Vite development server
+- backend runs `npm run dev`
+- model API runs `uvicorn ... --reload`
+
+Useful commands:
+
+```bash
+docker compose config
+docker compose build
+docker compose up -d
+docker compose ps
+docker compose logs
+docker compose down
+```
+
+Health checks you can run after startup:
+
+```bash
+curl -I http://localhost:5173
+curl http://localhost:4000
+curl http://localhost:8000/health
+```
+
+The Compose file expects:
+
+- `src/backend/.env` to exist
+- Neon or another reachable PostgreSQL database to be configured in that file
+- model artifacts to be present in `model_api/models/`
+
+The current repository includes the required `.joblib` model files in `model_api/models/`.
 
 ## Frontend Usage
 
@@ -400,7 +452,8 @@ uvicorn model_api.app.main:app --reload
 - The app should support business judgment, not replace it.
 - Only upload data you are allowed to process.
 - The backend currently expects a reachable PostgreSQL database.
-- The model API requires trained `.joblib` model files at the configured paths.
+- The Docker Compose setup is for development, not production deployment.
+- The model API requires trained `.joblib` model files at the configured paths and they are included in this repository.
 - The frontend was written by AI and should be reviewed like any generated code before production use.
 
 ## License
